@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>성시경 먹을텐데 지도</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>🍶 성시경 <span>먹을텐데</span> 지도</h1>
+  <p>성시경이 다녀간 곳만 · 매일 업데이트</p>
+  <div class="controls">
+    <input id="q" placeholder="식당·메뉴·동 검색 (예: 냉면, 성수)">
+    <select id="cat"><option value="">전체 메뉴</option></select>
+  </div>
+</header>
+<main>
+  <div id="map"></div>
+  <div id="list">
+    <div class="meta"><span id="count"></span><span id="updated" style="margin:0 6px"></span><button id="locate">📍 내 주변</button></div>
+  </div>
+</main>
+<div id="detail"></div>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

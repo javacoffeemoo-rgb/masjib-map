@@ -1,0 +1,23 @@
+name: daily-mukten-update
+on:
+  schedule:
+    - cron: "0 0 * * *"   # 매일 09:00 KST
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r updater/requirements.txt
+      - run: python updater/fetch_mukten.py
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "auto: 먹을텐데 후보 업데이트"
