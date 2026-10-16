@@ -362,5 +362,47 @@
     "youtubeId": "BY3BY_7ZYSk",
     "publishedAt": "2026-07-16",
     "verified": false
+  },
+  {
+    "id": "먹거리집-6D0dhN",
+    "name": "먹거리집",
+    "category": "순대국",
+    "address": "서울 중랑구 상봉로 137",
+    "lat": 37.595664,
+    "lng": 127.093003,
+    "menu": "순대국·수육",
+    "youtubeTitle": "[sub] 성시경의 먹을텐데 l 상봉역 부흥축산",
+    "youtubeUrl": "https://www.youtube.com/watch?v=6D0dhN2y0b8",
+    "youtubeId": "6D0dhN2y0b8",
+    "publishedAt": "2025-09-30",
+    "verified": true
+  },
+  {
+    "id": "hampyeong-Un7Nbf",
+    "name": "함평국밥",
+    "category": "국밥",
+    "address": "서울 중랑구 상봉로33길 73 (상봉동 90-64) *좌표근사-네이버에서수정요망",
+    "lat": 37.589424,
+    "lng": 127.093732,
+    "menu": "육회·국밥",
+    "youtubeTitle": "[sub] 성시경의 먹을텐데 l 상봉동 함평국밥",
+    "youtubeUrl": "https://www.youtube.com/watch?v=Un7Nbfh42hg",
+    "youtubeId": "Un7Nbfh42hg",
+    "publishedAt": "2024-07-15",
+    "verified": false
+  },
+  {
+    "id": "buheung-vDVTYh",
+    "name": "부흥축산",
+    "category": "고기",
+    "address": "서울 중랑구 상봉로91길 8 (상봉동 113-23) *좌표근사-네이버에서수정요망",
+    "lat": 37.590908,
+    "lng": 127.093609,
+    "menu": "상봉동 정육",
+    "youtubeTitle": "[sub] 성시경의 먹을텐데 l 상봉동 부흥축산",
+    "youtubeUrl": "https://www.youtube.com/watch?v=vDVTYhm-2uU",
+    "youtubeId": "vDVTYhm-2uU",
+    "publishedAt": "2024-07-08",
+    "verified": false
   }
 ]

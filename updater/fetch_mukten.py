@@ -31,14 +31,17 @@ def yt_get(url, params):
     with urllib.request.urlopen(f"{url}?{q}", timeout=20) as r:
         return json.loads(r.read().decode())
 
-def fetch_playlist_videos(max_n=15):
-    """최근 영상 max_n개 반환"""
+def fetch_playlist_videos(max_n=None):
+    """재생목록 전체(또는 최근 max_n개) 반환. 페이징 끝까지 순회."""
     items, page = [], None
-    while len(items) < max_n:
-        p = {"part": "snippet,contentDetails", "playlistId": PLAYLIST_ID, "maxResults": min(50, max_n - len(items))}
+    while True:
+        p = {"part": "snippet,contentDetails", "playlistId": PLAYLIST_ID, "maxResults": 50}
         if page: p["pageToken"] = page
         data = yt_get("https://www.googleapis.com/youtube/v3/playlistItems", p)
         items += data.get("items", [])
+        if max_n and len(items) >= max_n:
+            items = items[:max_n]
+            break
         page = data.get("nextPageToken")
         if not page: break
     out = []
@@ -95,7 +98,7 @@ def main():
         return
     rest = json.loads(REST_JSON.read_text(encoding="utf-8"))
     known_ids = {r.get("youtubeId") for r in rest if r.get("youtubeId")}
-    videos = fetch_playlist_videos(15)
+    videos = fetch_playlist_videos()
     videos = fetch_descriptions(videos)
     new_cands = []
     for v in videos:
