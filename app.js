@@ -66,7 +66,7 @@ function renderList(list) {
     d.id = "card-" + r.id;
     d.innerHTML = `<h3>${r.name}<em>${r.category}</em></h3>
       <div class="addr">${r.address}</div>
-      <div class="menu">🍽 ${r.menu}</div>
+      ${r.menu ? `<div class="menu">🍽 ${r.menu}</div>` : ""}
       <div class="links">
         <a class="btn yt" href="${r.youtubeUrl}" target="_blank" onclick="event.stopPropagation()">▶ 영상보기</a>
         <a class="btn" href="${naverLink(r)}" target="_blank" onclick="event.stopPropagation()">네이버지도</a>
@@ -87,7 +87,7 @@ function showDetail(id, moveMap) {
   det.innerHTML = `<button class="close" onclick="hideDetail()">✕</button>
     <h2>${r.name} <span style="font-size:12px;color:#888">${r.category}</span></h2>
     <div style="font-size:13px;color:#555">${r.address}</div>
-    <div style="font-size:13px;margin-top:6px">🍽 ${r.menu}</div>
+    ${r.menu ? `<div style="font-size:13px;margin-top:6px">🍽 ${r.menu}</div>` : ""}
     <div style="font-size:12px;color:#888;margin-top:6px">🎬 ${r.youtubeTitle}</div>
     <div class="row">
       <a class="naver" target="_blank" href="${naverLink(r)}">네이버 길찾기</a>
