@@ -2,6 +2,14 @@ let allData = [];
 let markers = [];
 let map = null;
 let infoWindow = null;
+let userLoc = null;
+
+function distKm(a, b, c, d) {
+  const R = 6371, t = Math.PI / 180;
+  const h = Math.sin((c - a) * t / 2) ** 2 + Math.cos(a * t) * Math.cos(c * t) * Math.sin((d - b) * t / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+function fmtDist(km) { return km < 1 ? Math.round(km * 1000) + "m" : km.toFixed(1) + "km"; }
 
 function loadNaverMap() {
   return new Promise((resolve, reject) => {
@@ -65,7 +73,8 @@ function renderList(list) {
     const d = document.createElement("div");
     d.className = "card";
     d.id = "card-" + r.id;
-    d.innerHTML = `<h3>${r.name}<em>${r.category}</em></h3>
+    const dist = userLoc ? `<em class="dist">📍${fmtDist(distKm(userLoc.lat, userLoc.lng, r.lat, r.lng))}</em>` : "";
+    d.innerHTML = `<h3>${r.name}<em>${r.category}</em>${dist}</h3>
       <div class="addr">${r.address}</div>
       ${r.menu ? `<div class="menu">🍽 ${r.menu}</div>` : ""}
       <div class="links">
@@ -115,6 +124,8 @@ function applyFilter() {
     const okC = !cat || r.category === cat;
     return okQ && okC;
   });
+  if (userLoc) list = list.slice().sort((a, b) =>
+    distKm(userLoc.lat, userLoc.lng, a.lat, a.lng) - distKm(userLoc.lat, userLoc.lng, b.lat, b.lng));
   renderList(list);
   if (map) drawMarkers(list);
 }
@@ -141,11 +152,15 @@ async function boot() {
   document.getElementById("q").addEventListener("input", applyFilter);
   document.getElementById("cat").addEventListener("change", applyFilter);
   document.getElementById("locate").onclick = () => {
-    if (!navigator.geolocation || !map) return alert("위치 미지원");
+    if (!navigator.geolocation) return alert("위치 미지원");
     navigator.geolocation.getCurrentPosition((p) => {
-      map.setCenter(new naver.maps.LatLng(p.coords.latitude, p.coords.longitude));
-      map.setZoom(14);
-    });
+      userLoc = { lat: p.coords.latitude, lng: p.coords.longitude };
+      if (map) {
+        map.setCenter(new naver.maps.LatLng(userLoc.lat, userLoc.lng));
+        map.setZoom(14);
+      }
+      applyFilter();
+    }, () => alert("위치 권한을 허용해주세요"));
   };
   try {
     await loadNaverMap();
