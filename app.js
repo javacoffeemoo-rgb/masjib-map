@@ -52,6 +52,7 @@ function drawMarkers(list) {
 }
 
 function naverLink(r) {
+  // 네이버 리뷰 API가 외부에 없어 플레이스 검색으로 연결 (첫 결과가 해당 가게)
   return "https://map.naver.com/p/search/" + encodeURIComponent(r.name + " " + r.address);
 }
 
@@ -69,7 +70,7 @@ function renderList(list) {
       ${r.menu ? `<div class="menu">🍽 ${r.menu}</div>` : ""}
       <div class="links">
         <a class="btn yt" href="${r.youtubeUrl}" target="_blank" onclick="event.stopPropagation()">▶ 영상보기</a>
-        <a class="btn" href="${naverLink(r)}" target="_blank" onclick="event.stopPropagation()">네이버지도</a>
+        <a class="btn review" href="${naverLink(r)}" target="_blank" onclick="event.stopPropagation()">⭐ 리뷰보기</a>
         <button class="btn" onclick="event.stopPropagation();copyAddr('${r.id}')">주소복사</button>
       </div>`;
     d.onclick = () => showDetail(r.id, true);
@@ -90,9 +91,10 @@ function showDetail(id, moveMap) {
     ${r.menu ? `<div style="font-size:13px;margin-top:6px">🍽 ${r.menu}</div>` : ""}
     <div style="font-size:12px;color:#888;margin-top:6px">🎬 ${r.youtubeTitle}</div>
     <div class="row">
-      <a class="naver" target="_blank" href="${naverLink(r)}">네이버 길찾기</a>
+      <a class="naver" target="_blank" href="${naverLink(r)}">⭐ 리뷰·길찾기</a>
       <a class="youtube" target="_blank" href="${r.youtubeUrl}">유튜브 원본</a>
-    </div>`;
+    </div>
+    <div style="font-size:11px;color:#999;margin-top:8px">리뷰는 네이버 플레이스에서 확인 (검색 첫 결과가 해당 가게)</div>`;
   det.classList.add("show");
   if (moveMap && map) {
     map.setCenter(new naver.maps.LatLng(r.lat, r.lng));

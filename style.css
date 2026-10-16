@@ -22,6 +22,7 @@ main { display: flex; flex-direction: column; height: calc(100% - 118px); }
 .card .links { display: flex; gap: 8px; margin-top: 8px; }
 .card a.btn, .card button.btn { flex: 1; text-align: center; font-size: 12px; text-decoration: none; padding: 8px; border-radius: 9px; border: 1px solid #ddd; background: #fafafa; color: #222; cursor: pointer; }
 .card a.yt { background: #ff0033; color: #fff; border-color: #ff0033; font-weight: 700; }
+.card a.review { background: #03c75a; color: #fff; border-color: #03c75a; font-weight: 700; }
 #detail { position: fixed; left: 0; right: 0; bottom: 0; background: #fff; border-radius: 18px 18px 0 0; padding: 16px; box-shadow: 0 -4px 20px rgba(0,0,0,.2); transform: translateY(110%); transition: .25s; z-index: 30; max-width: 640px; margin: 0 auto; }
 #detail.show { transform: none; }
 #detail h2 { margin: 0 0 6px; font-size: 18px; }
